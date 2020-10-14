@@ -20,8 +20,8 @@
 				<ul>
 					<li><a href="index.html">Home</a></li>
 					<li><a href="programming.html" class="active">Programming</a></li>
-					<li><a href="#">Blender</a></li>
-					<li><a href="#">Photography</a></li>
+					<li><a href="blender.html">Blender</a></li>
+					<li><a title="Coming soon" >Photography</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -31,7 +31,7 @@
 			<div class="inner">
 				<nav>
 					<ul>
-						<li><a href="index.html#welcome"><i class="fas fa-angle-double-left"></i>  Home</a></li>
+						<li><a href="#home"><i class="fas fa-angle-double-left"></i>  Home</a></li>
 						<li><a href="#rtr">Real time raytracing</a></li>
 						<li><a href="#ssdo">SSDO</a></li>
 						<li><a href="#bezier">n-sided Bezier patches</a></li>
@@ -43,63 +43,88 @@
 			</div>
 		</section>
 
-		<!-- Wrapper -->
+		<!-- main content -->
 		<div id="wrapper">
 
-			<!--about-->
-			<section class="wrapper style1-alt">
+			<!-- intro -->
+			<section id="home" class="wrapper style1-alt">
 				<div class="inner">
 					<h1 class="major">Programming projects</h1>
 					<p>
 						I listed below the main projects I worked on. Some of them are from university assignments, the other are personnal
 						projects. A GitHub repository is linked when it is possible, so feel free to dig in the code.
 					</p>
+					<ul class="actions">
+						<li><a href="index.html#welcome" class="button">Main page</a></li>
+						<li><a href="https://github.com/NathanRth" class="button">GitHub</a></li>
+					</ul>
 				</div>
 			</section>
+
+			<!-- raytracing -->
 			<section id="rtr" class="wrapper style1 fade-up">
 				<div class="inner">
 					<h2>Real Time Raytracing</h2>
 					<p>
-						This is my final year project from late 2019. Over the semester I worked on implementing a raytracer in real-time using
-						the GPU. I used WebGL and GLSL shader to create the renderer.
+						This is my final year project from late 2019. Over the semester I worked on implementing a raytracer in real-time using the GPU. I used WebGL and GLSL shader to create the renderer. The shperes and plane are of parametric type, but geometric triangle are supported. (Project to be continued)
 					</p>
 					<div class="box alt">
 						<div class="row gtr-uniform">
 							<div class="col-6">
 								<span class="image fit"><img src="images/programming/rtr1.jpg" alt="" /></span>
-								<p>This my renderer</p>
+								<p>My renderer</p>
 							</div>
 							<div class="col-6">
 								<span class="image fit"><img src="images/programming/rtr2.jpg" alt="" /></span>
-								<p>And this is a Blender scene with the closest parameters possible</p>
+								<p>Blender Cycle (scene with the approximatly the same parameters)</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Work experience -->
+			<!-- SSDO -->
 			<section id="ssdo" class="wrapper style1-alt fade-up">
 				<div class="inner">
 					<h2>Screen Space Directional Occlusion</h2>
+					<p>
+						This is what I worked on during my third year internship at <a href="https://hapticmedia.fr/">Hapticmedia</a>. The Screen Space Directional Occlusion (SSDO) 
+						is a type of Screen Space Ambiant Occlusion (SSAO).
+					</p>
+						<blockquote><a href="https://people.mpi-inf.mpg.de/~ritschel/Papers/SSDO.pdf">Approximating Dynamic Global Illumination in Image Space, T. Ritschel, T. Grosch, H-P. Seidel</a></blockquote>
+					
+					<h3>SSAO</h3>
+					<p>
+						Classic SSAO simulates contact shadows in image space by computing the amount of incoming light on a certain point P on a surface. It does so by using a small group of points arange in an hemisphere oriented around P. Using the poisition of those points, the ratio of the number points under the surrounding surface against the number of points above it is calculated, which the can be used to dim the default darken the surface to simulate contact shadows.
+					</p>
 
-					This is what I worked on during my third year internship at <a>Hapticmedia</a>. The Screen Space Directional Occlusion (SSDO) is a type of 
-					<a>Screen Space Ambiant Occlusion</a>.
-					<blockquote>Original paper: <a href="https://people.mpi-inf.mpg.de/~ritschel/Papers/SSDO.pdf">Approximating Dynamic Global Illumination in Image Space, T. Ritschel, T. Grosch, H-P. Seidel</a></blockquote>
-					<h3>Screen Space Ambiant Occlusion</h3>
-
-					<h3>SSDO: 1<sup>st</sup> pass</h3>
-
-					<h3>My work</h3>
 					<div class="box alt">
 						<div class="row gtr-uniform">
-							<div class="col-6">
-								<span class="image fit"><img src="images/programming/rtr1.jpg" alt="" /></span>
-								<p>This my renderer</p>
+							<div class="col-6"  style="margin: auto;">
+								<span class="image fit"><img src="images/programming/ssao.png" alt="" /></span>
+								<p>Left: Albedo. Center: SSAO pass. Right: Albedo + SSAO</p>
 							</div>
-							<div class="col-6">
-								<span class="image fit"><img src="images/programming/rtr2.jpg" alt="" /></span>
-								<p>And this is a Blender scene with the closest parameters possible</p>
+						</div>
+					</div>
+
+					<h3>SSDO</h3>
+					<p>
+						The SSDO algorithme uses the same basis, but it uses the color framebuffer to compute the influence of neaby colored surfaces, producing colored contact shadows. SSDO is also capable, by using the normal framebuffer of the influence points, to simulated indirect lighting at short range. During my internship, I implemented the SSDO, the I extended it to take into account the environement lighting.
+					</p>
+					<div class="box alt">
+						<div class="row gtr-uniform">
+							<div class="col-6" style="margin: auto;">
+								<span class="image fit"><img src="images/programming/ssdo.png" alt="" /></span>
+								<p>Left: Albedo + SSAO. Center: Albedo + SSDO. Right: SSDO pass</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="box alt">
+						<div class="row gtr-uniform">
+							<div class="col-6" style="margin: auto;">
+								<span class="image fit"><img src="images/programming/ssdo_full.png" alt="" /></span>
+								<p>SSDO pass (purple lighting in the scene)</p>
 							</div>
 						</div>
 					</div>
@@ -107,68 +132,80 @@
 			</section>
 
 			<!-- Bezier patches -->
-			<section id="bezier" class="wrapper style1-alt fade-up">
+			<section id="bezier" class="wrapper style2 fade-up">
 				<div class="inner">
 					<h2>n-sided Bezier Patches</h2>
+					<p>
+					This is my final project of my fourth year into the CMI. With another student, and the help of a proffessor, we explored how Bezier patches could be extended
+					beyond their limited 4-sided form. From this paper () we worked on implemmenting such objects. We ended up with the expectde results. 
+					</p>
+					<blockquote><a href="https://webmail.partage.renater.fr/service/home/~/?auth=co&loc=fr&id=577&part=2">A Multisided Generalization of Bbzier Surfaces , Charles T. LOOP and Tony D. DEROSE </a></blockquote>
+					<blockquote><a href="https://webmail.partage.renater.fr/service/home/~/?auth=co&loc=fr&id=577&part=2">Generalized Barycentric Coordinates in Computer Graphics and Computational Mechanics, Kai Hormann and N. Sukumar</a></blockquote>
+					<div class="box alt">
+						<div class="row gtr-uniform">
+							<div class="col-4">
+								<span class="image fit"><img src="images/programming/spatch_3_3.jpg" alt="" /></span>
+								<p>An order 3 3-sided patch</p>
+							</div>
+							<div class="col-4">
+								<span class="image fit"><img src="images/programming/spatch_4_3.jpg" alt="" /></span>
+								<p>An order 3 4-sided patch</p>
+							</div>
+							<div class="col-4">
+								<span class="image fit"><img src="images/programming/spatch_5_3.jpg" alt="" /></span>
+								<p>An order 3 5-sided patch</p>
+							</div>
+						</div>
+					</div>
 
-					This is what I worked on during my third year internship at <a>Hapticmedia</a>. The Screen Space Directional Occlusion (SSDO) is a type of 
-					<a>Screen Space Ambiant Occlusion</a>.
-					<blockquote>Original paper: <a href="https://people.mpi-inf.mpg.de/~ritschel/Papers/SSDO.pdf">Approximating Dynamic Global Illumination in Image Space, T. Ritschel, T. Grosch, H-P. Seidel</a></blockquote>
-					<h3>Screen Space Ambiant Occlusion</h3>
+				</div>
+			</section>
 
-					<h3>SSDO: 1<sup>st</sup> pass</h3>
+			<!-- Mesh segmentation -->
+			<section id="mesh" class="wrapper style2-alt fade-up">
+				<div class="inner">
+					<h2>Automated Mesh Segmentation</h2>
+
+					<p>
+						Another University project, where the goal was, given a sample of scanned trees and plants, to divide the plant in three types of sub-meshes : trunk, branches and leaves. We choose a skeletonization algorithm, which decimate the mesh to create a skeleton representing the overall shape. It also stores, for each new vertex created to construct the skeleton, the list of the decimated vertices that helped create it. With those data, we planned to run further analysis to determine to which categories those vertices belong to. However, due to short deadlines and faulty geometric data-structure, we only got partial results (albeit with very short computation times)
+					</p>
+
+					<blockquote><a href="https://www.researchgate.net/profile/Zhiyong_Huang/publication/220792152_Decomposing_polygon_meshes_for_interactive_applications/links/0c96052312d3026350000000/Decomposing-polygon-meshes-for-interactive-applications.pdf">Decomposing Polygon Meshes for Interactive Applications, Xuetao Li, Tong Wing Woon, Tiow Seng Tan and Zhiyong Huang</a></blockquote>
 
 					<h3>My work</h3>
 					<div class="box alt">
 							<div class="row gtr-uniform">
-								<div class="col-4">
-									<span class="image fit"><img src="images/programming/spatch_3_3.jpg" alt="" /></span>
-									<p>An order 3 3-sided patch</p>
+								<div class="col-6">
+									<span class="image fit"><img src="images/programming/mesh1.png" alt="" /></span>
+									<p>Left: the base mesh, center: our segmentation, right: corresponding skeleton</p>
 								</div>
-								<div class="col-4">
-									<span class="image fit"><img src="images/programming/spatch_4_3.jpg" alt="" /></span>
-									<p>An order 3 4-sided patch</p>
-								</div>
-								<div class="col-4">
-									<span class="image fit"><img src="images/programming/spatch_5_3.jpg" alt="" /></span>
-									<p>An order 3 5-sided patch</p>
+								<div class="col-6">
+									<span class="image fit"><img src="images/programming/mesh3.png" alt="" /></span>
+									<p>Another skeleton</p>
 								</div>
 							</div>
 						</div>
 				</div>
 			</section>
 
-			<!-- Bezier patches -->
-			<section id="mesh" class="wrapper style1-alt fade-up">
-					<div class="inner">
-						<h2>Automated Mesh Segmentation</h2>
-	
-						This is what I worked on during my third year internship at <a>Hapticmedia</a>. The Screen Space Directional Occlusion (SSDO) is a type of 
-						<a>Screen Space Ambiant Occlusion</a>.
-						<blockquote>Original paper: <a href="https://people.mpi-inf.mpg.de/~ritschel/Papers/SSDO.pdf">Approximating Dynamic Global Illumination in Image Space, T. Ritschel, T. Grosch, H-P. Seidel</a></blockquote>
-						<h3>Screen Space Ambiant Occlusion</h3>
-	
-						<h3>SSDO: 1<sup>st</sup> pass</h3>
-	
-						<h3>My work</h3>
-						<div class="box alt">
-								<div class="row gtr-uniform">
-									<div class="col-4">
-										<span class="image fit"><img src="images/programming/mesh1.png" alt="" /></span>
-										<p>An order 3 3-sided patch</p>
-									</div>
-									<div class="col-4">
-										<span class="image fit"><img src="images/programming/mesh2.png" alt="" /></span>
-										<p>An order 3 4-sided patch</p>
-									</div>
-									<div class="col-4">
-										<span class="image fit"><img src="images/programming/mesh3.png" alt="" /></span>
-										<p>An order 3 5-sided patch</p>
-									</div>
-								</div>
-							</div>
-					</div>
-				</section>
+			<!-- tos -->
+			<section id="tos" class="wrapper style1 fade-up">
+				<div class="inner">
+					<h2>Quasi-linear algorithm for Tree of Shape computation</h2>
+					<p><i>Coming soon</i></p>
+				</div>
+					
+			</section>
+
+			<!-- NES -->
+			<section id="nes" class="wrapper style1-alt fade-up">
+				<div class="inner">
+					<h2>NES Emulator</h2>
+					<p>
+						A personnal project, motivated by the very informative videos of <a href="https://www.youtube.com/watch?v=8XmxKPJDGU0">javidx9</a>. <i>Details coming soon</i>
+					</p>
+				</div>
+			</section>
 		</div>
 
 		<!-- Footer -->
